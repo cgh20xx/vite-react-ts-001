@@ -5,8 +5,14 @@ type BtnProps = {
 
 // 在 ts 中 props 必需傳入一個泛型告訴裡面的物件是什麼型別。
 const Btn: React.FC<BtnProps> = ({total}) => {
+  function add() {
+    total++
+    console.log(total);
+    // 注意：觀察 console.log total 有被更新，但畫面沒有重新 render。
+  }
   return (
-    <button>
+    // 注意：原生 js 使用 onclick，react 使用 onClick。 
+    <button onClick={add}>
       +1, 
       <span> total:{total}</span>
     </button>
