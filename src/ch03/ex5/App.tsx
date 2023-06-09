@@ -1,7 +1,9 @@
 import React from 'react'
 
 // Btn 元件
-type BtnProps = object
+type BtnProps = {
+  clickHandler: () => void
+}
 type BtnState = object
 
 class Btn extends React.Component<BtnProps, BtnState> {
@@ -11,7 +13,7 @@ class Btn extends React.Component<BtnProps, BtnState> {
 
   // overrid React.Component 的 render 方法
   render(): React.ReactNode {
-    return <button>+1</button>
+    return <button onClick={this.props.clickHandler}>+1</button>
   }
 }
 
@@ -24,12 +26,17 @@ class App extends React.Component<AppProps, AppState> {
     super(props)
   }
 
+  // 定義一個 countClickHandler() method
+  countClickHandler() {
+    console.log('countClickHandler');
+  }
+
   // overrid React.Component 的 render 方法
   render(): React.ReactNode {
     return (
       <>
         <h1>Count: 0</h1>
-        <Btn />
+        <Btn clickHandler={this.countClickHandler} />
       </>
     )
   }
