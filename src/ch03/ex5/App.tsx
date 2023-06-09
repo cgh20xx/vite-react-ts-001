@@ -24,9 +24,27 @@ type AppState = object
 class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props)
+    console.log('constructor');
+  }
+  // 以下有三個最常用的生命週期方法
+
+  // 1. Component 被安裝到畫面之後
+  componentDidMount(): void {
+    console.log('componentDidMount');
   }
 
-  // 定義一個 countClickHandler() method
+  // 2. Component 更新完之後
+  componentDidUpdate(prevProps: object, prevState: object, snapshot?: any): void {
+    console.log('componentDidUpdate');
+  }
+
+  // 3. Component 將被刪除之前
+  componentWillUnmount(): void {
+    console.log('componentWillUnmount');
+  }
+
+
+  // 自定義一個 countClickHandler() method
   countClickHandler() {
     console.log('countClickHandler');
   }
