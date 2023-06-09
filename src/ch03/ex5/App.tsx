@@ -19,12 +19,18 @@ class Btn extends React.Component<BtnProps, BtnState> {
 
 // App 元件
 type AppProps = object
-type AppState = object
+type AppState = {
+  count: number
+}
 
 class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props)
     console.log('constructor');
+    // 新增一個名為 count 的 state
+    this.state = {
+      count: 0
+    }
   }
   // 以下有三個最常用的生命週期方法
 
@@ -53,7 +59,7 @@ class App extends React.Component<AppProps, AppState> {
   render(): React.ReactNode {
     return (
       <>
-        <h1>Count: 0</h1>
+        <h1>Count: {this.state.count}</h1>
         <Btn clickHandler={this.countClickHandler} />
       </>
     )
