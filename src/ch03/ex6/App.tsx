@@ -9,16 +9,28 @@ type BtnProps = {
   onBtnClickHandler: () => void
 }
 
+const BtnAdd = styled.button`
+  padding: .5rem 1rem;
+  border: 2px solid lightblue;
+  border-radius: .5rem;
+  background-color: #eff;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #cef;
+  }
+`
+
 // 在 ts 中 props 必需傳入一個泛型告訴裡面的物件是什麼型別。
 // 讓組件有狀態(state)，改變狀態 -> 自動觸發畫面更新
 const Btn: React.FC<BtnProps> = (props) => {
   console.log('render Btn');
   return (
     // 注意：原生 js 使用 onclick，react 使用 onClick。 
-    <button onClick={props.onBtnClickHandler}>
+    <BtnAdd onClick={props.onBtnClickHandler}>
       +1, 
       <span> total:{props.total}</span>
-    </button>
+    </BtnAdd>
   )
 }
 
