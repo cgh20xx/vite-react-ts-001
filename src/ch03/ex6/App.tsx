@@ -9,8 +9,23 @@ type BtnProps = {
   onBtnClickHandler: () => void
 }
 
-const BtnAdd = styled.button<{$size?: string}>`
-  padding: ${props => props.$size || '1rem'};
+type BtnAddPropType = {
+  $size?: number
+}
+
+// 將 BtnAdd 新增一個自訂(非HTML)的 $size 屬性，可以改變 padding 大小。
+// https://styled-components.com/docs/basics#passed-props
+// 使用 attrs 可以將額外的屬性附加到組件中
+const BtnAdd = styled.button.attrs<BtnAddPropType>((props) => {
+  return {
+    // 這邊可以定義 static 的 HTML 屬性
+    name: 'Add',
+    // 這邊可以自定動態屬性
+    $size: props.$size || 1
+  }
+})<BtnAddPropType>`
+  /* 這邊可以直接拿到動態的屬性來用 */
+  padding: ${props => (props.$size as number / 2)}rem ${props => props.$size}rem;
   border: 2px solid lightblue;
   border-radius: .5rem;
   background-color: #eff;
@@ -28,7 +43,7 @@ const Btn: React.FC<BtnProps> = (props) => {
   console.log('render Btn');
   return (
     // 注意：原生 js 使用 onclick，react 使用 onClick。 
-    <BtnAdd onClick={props.onBtnClickHandler} $size="2rem">
+    <BtnAdd onClick={props.onBtnClickHandler} $size={3}>
       +1, 
       <span> total:{props.total}</span>
     </BtnAdd>
