@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client'
 // import App from '@/ch03/ex1/App'
 // import App from '@/ch03/ex1/App2'
 // import App from '@/ch03/ex4/App'
-import App from '@/ch03/ex5/App'
+// import App from '@/ch03/ex5/App'
+import App from '@/ch03/ex6/App'
 
 import './index.css'
 
