@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import styled from 'styled-components';
 
+// 將之前寫的計數器加上 css 樣式
+
 // 定義 props 物件的型別
 type BtnProps = {
   total: number
@@ -20,6 +22,15 @@ const Btn: React.FC<BtnProps> = (props) => {
   )
 }
 
+const Title = styled.h1`
+  color: red;
+  font-size: 50px;
+
+  &:hover {
+    color: #ccc;
+  }
+`
+
 // 顯示一個計數器，顯示 total 總數。
 const App: React.FC = () => {
   console.log('render App');
@@ -32,7 +43,7 @@ const App: React.FC = () => {
   }
   return (
     <>
-      <h1>計數器：{total}</h1>
+      <Title>計數器：{total}</Title>
       <Btn total={total} onBtnClickHandler={add} />
     </>
   )
