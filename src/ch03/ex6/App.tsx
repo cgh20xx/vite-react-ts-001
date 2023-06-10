@@ -14,6 +14,7 @@ const BtnAdd = styled.button`
   border: 2px solid lightblue;
   border-radius: .5rem;
   background-color: #eff;
+  color: orange;
 
   &:hover {
     cursor: pointer;
