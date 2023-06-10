@@ -9,8 +9,8 @@ type BtnProps = {
   onBtnClickHandler: () => void
 }
 
-const BtnAdd = styled.button`
-  padding: .5rem 1rem;
+const BtnAdd = styled.button<{$size?: string}>`
+  padding: ${props => props.$size || '1rem'};
   border: 2px solid lightblue;
   border-radius: .5rem;
   background-color: #eff;
@@ -28,7 +28,7 @@ const Btn: React.FC<BtnProps> = (props) => {
   console.log('render Btn');
   return (
     // 注意：原生 js 使用 onclick，react 使用 onClick。 
-    <BtnAdd onClick={props.onBtnClickHandler}>
+    <BtnAdd onClick={props.onBtnClickHandler} $size="2rem">
       +1, 
       <span> total:{props.total}</span>
     </BtnAdd>
