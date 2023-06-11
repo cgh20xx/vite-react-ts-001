@@ -2,7 +2,13 @@ import React from 'react';
 
 // 說明：有 ScoreBoardA、ScoreBoardB 兩個 Component，功能為呈現自己當前的 totalScore。
 // totalScore 計算方式：getCurrentScore + getScoreByBoardName
+
 // 問題：可以發現這兩個 Component 除了 totalScore 計算方式有些許不同，其餘完全一樣，之後可以把共用的部份拆出來。
+
+// 解決方式：使用 Higher Order Component (HOC) 幫助我們重複使用程式碼的 React Component。
+// https://pjchender.dev/react/react-higher-order-component/
+
+// 簡單來說就是建立一個 fuction 把不同的部份當參數傳進去，回傳一個新的 component。
 
 // ======================= type ========================
 
