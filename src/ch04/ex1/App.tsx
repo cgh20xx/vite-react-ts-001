@@ -8,20 +8,27 @@ import React from 'react';
 // 解決方式：使用 Higher Order Component (HOC) 幫助我們重複使用程式碼的 React Component。
 // https://pjchender.dev/react/react-higher-order-component/
 
-// 簡單來說就是建立一個 fuction 把不同的部份當參數傳進去，回傳一個新的 component。
+// 簡單來說就是
+// 1. 建立一個 fuction 把不同的部份當參數傳進去，回傳一個新的 component。
+// 2. 將 ScoreBoardA、ScoreBoardB 原本的 state.totalScore 移除
+// 3. 改由 HOC 上傳入 props.totalScore 給 ChildComponent
 
 // ======================= type ========================
 
 type AppProps = object
 
-type AProps = object
-type AState = {
+type AProps = {
   totalScore: number;
 }
+type AState = {
+  // totalScore: number;
+}
 
-type BProps = object
-type BState = {
+type BProps = {
   totalScore: number;
+}
+type BState = {
+  // totalScore: number;
 }
 
 // ======================= fake api ========================
@@ -45,21 +52,11 @@ function getScoreByBoardName(boardName: string) {
 class ScoreBoardA extends React.Component<AProps, AState> {
   constructor(props: AProps) {
     super(props)
-    this.state = {
-      totalScore: 0
-    }
-  }
-
-  // 組件被安裝時
-  componentDidMount() {
-    this.setState({
-      totalScore: getCurrentScore() + getScoreByBoardName('boardA')
-    })
   }
 
   render(): React.ReactNode {
       return <>
-        <p>A Total Score: {this.state.totalScore}</p>
+        <p>A Total Score: {this.props.totalScore}</p>
       </>
   }
 }
@@ -67,24 +64,44 @@ class ScoreBoardA extends React.Component<AProps, AState> {
 class ScoreBoardB extends React.Component<BProps, BState> {
   constructor(props: BProps) {
     super(props)
-    this.state = {
-      totalScore: 0
-    }
-  }
-
-  // 組件被安裝時
-  componentDidMount() {
-    this.setState({
-      totalScore: getCurrentScore() + getScoreByBoardName('boardB')
-    })
   }
 
   render(): React.ReactNode {
       return <>
-        <p>A Total Score: {this.state.totalScore}</p>
+        <p>A Total Score: {this.props.totalScore}</p>
       </>
   }
 }
+
+type BoardTotal = {
+  totalScore: number
+}
+// 實作 HOC：建立一個 fuction 把不同的部份當參數傳進去，回傳一個新的 component。
+function withTotalScore(ChildComponent: React.ComponentType<BoardTotal>, boardName: string) {
+  return class extends React.Component<object, BoardTotal> {
+    constructor(props: BProps) {
+      super(props)
+      this.state = {
+        totalScore: 0
+      }
+    }
+  
+    // 組件被安裝時
+    componentDidMount() {
+      this.setState({
+        totalScore: getCurrentScore() + getScoreByBoardName(boardName)
+      })
+    }
+  
+    render(): React.ReactNode {
+        return <ChildComponent totalScore={this.state.totalScore} />
+    }
+  }
+}
+
+// 傳入不同參數產生出不同的 Component
+const BoardAWidthTotalScore = withTotalScore(ScoreBoardA, 'boardA');
+const BoardBWidthTotalScore = withTotalScore(ScoreBoardB, 'boardB');
 
 // ======================== main =======================
 
@@ -95,8 +112,8 @@ class App extends React.Component {
   render(): React.ReactNode {
       return (
         <>
-          <ScoreBoardA />
-          <ScoreBoardB />
+          <BoardAWidthTotalScore />
+          <BoardBWidthTotalScore />
         </>
       )
   }
