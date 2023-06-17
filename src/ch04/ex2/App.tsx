@@ -19,23 +19,23 @@ function getScoreByBoardName(boardName: string) {
 // ======================= two function component ========================
 
 const ScoreBoardA: React.FC = () => {
-  const [score, setScore] = useState(10)
+  const [score, setScore] = useState(0)
   useEffect(() => {
     console.log('ScoreBoardA 代入空陣列，只會動一次');
-    const currentScore = getCurrentScore() + getScoreByBoardName('BoardB')
+    const currentScore = getCurrentScore() + getScoreByBoardName('boardA')
     setScore(currentScore)
   }, [])
   return <p>board a {score}</p>
 }
 
 const ScoreBoardB: React.FC = () => {
-  const [score, setScore] = useState(880)
+  const [score, setScore] = useState(0)
   useEffect(() => {
     console.log('ScoreBoardB 代入空陣列，只會動一次');
-    const currentScore = getCurrentScore() + getScoreByBoardName('BoardB')
+    const currentScore = getCurrentScore() + getScoreByBoardName('boardB')
     setScore(currentScore)
   }, [])
-  return <p>board a {score}</p>
+  return <p>board b {score}</p>
 }
 
 
