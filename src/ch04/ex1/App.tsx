@@ -79,7 +79,7 @@ type BoardTotal = {
 // 實作 HOC：建立一個 fuction 把不同的部份當參數傳進去，回傳一個新的 component。
 function withTotalScore(ChildComponent: React.ComponentType<BoardTotal>, boardName: string) {
   return class extends React.Component<object, BoardTotal> {
-    constructor(props: BProps) {
+    constructor(props: object) {
       super(props)
       this.state = {
         totalScore: 0
