@@ -80,8 +80,18 @@ const App: React.FC = () => {
 
   function counterHandler() {
     console.log('counterHandler:before', counter);
-    setCounter(counter + 1)
-    setCounter(counter + 1)
+
+    // setCounter(counter + 1)
+    // setCounter(counter + 1)
+
+    // 若確實要執行兩次，應該使用 callback function，拿到上次的值再更新。
+    function cb(prev: number) {
+      console.log('prev:', prev);
+      return prev + 1
+    }
+    setCounter(cb)
+    setCounter(cb)
+
     // 雖然 setCounter 做了兩次，但兩個 counter 其實都是上一次的 counter，所以兩次做的事情是一樣的。
     console.log('counterHandler:after', counter); 
   }
