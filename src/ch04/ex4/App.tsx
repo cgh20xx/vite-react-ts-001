@@ -19,6 +19,12 @@ const App: React.FC = () => {
   useEffect(() => {
     console.log('useEffect: []');
   }, [])
+
+  // 2. 若 dependencies 傳入 [counter] 表只偵聽 counter 的變化
+  // 類似 watch 的功能
+  useEffect(() => {
+    console.log('useEffect: [counter]');
+  }, [counter])
   return (
     <>
       <h1>count: {counter}</h1>
