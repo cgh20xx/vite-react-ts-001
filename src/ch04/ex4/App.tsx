@@ -5,6 +5,7 @@ const App: React.FC = () => {
   console.log('App');
 
   const [counter, setCounter] = useState(0)
+  const [text, setText] = useState('偶數')
 
   function handleClick() {
     setCounter(counter + 1)
@@ -23,12 +24,14 @@ const App: React.FC = () => {
   // 2. 若 dependencies 傳入 [counter] 表只偵聽 counter 的變化
   // 類似 watch 的功能
   useEffect(() => {
-    console.log('useEffect: [counter]');
+    console.log('useEffect: [counter]')
+    counter % 2 === 0 ? setText('偶數') : setText('奇數')
   }, [counter])
   return (
     <>
       <h1>count: {counter}</h1>
       <button onClick={handleClick}>+1</button>
+      <p>{text}</p>
     </>
   )
 }
