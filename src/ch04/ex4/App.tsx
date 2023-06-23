@@ -28,7 +28,7 @@ const App: React.FC = () => {
     counter % 2 === 0 ? setText('偶數') : setText('奇數')
   }, [counter])
 
-  // 3. 若沒有傳入 dependencies，只要任務狀態更新就會觸發，通常不會這樣用，還不確定應用場景在哪？
+  // 3. 若沒有傳入 dependencies，只要任何狀態更新就會觸發，通常不會這樣用，還不確定應用場景在哪？
   // useEffect(() => {
   //   console.log('useEffect: undefined');
   // })
