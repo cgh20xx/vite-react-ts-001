@@ -13,19 +13,23 @@ const App: React.FC = () => {
 
   const [postId, setPostId] = useState(1)
   const [error, setError] = useState<Error | null>(null)
+  const [loading, setLoading] = useState(false)
 
   // 使用 async await 改寫 fetch
   // 注意： useEffect 第一個參數不支持 async function，故必需定義另一個 async function 並呼叫它。
   async function fetchData(id: number) {
+    // 打 api 前顯示 loading 提示
+    setLoading(true)
     try {
-      const res = await fetch(`https://jsonplaceholder.typicode.com123/comments?postId=${id}`)
+      const res = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${id}`)
       const data = await res.json() as Comments[]
       console.log('data2:', data);
     } catch (error) {
       console.log('error:', error);
       setError(error as Error) // 強制斷言 error 為 Error
     }
-    
+    // 打 api 後關閉 loading 提示
+    setLoading(false)
   }
 
   // 使用 fetch 打一個假的 api
@@ -44,6 +48,9 @@ const App: React.FC = () => {
     {/* 顯示錯誤訊息 */}
     {
       error !== null ? <p style={{ color: 'red'}}>資料獲取失敗</p> : null
+    }
+    {
+      loading ? <p>Loading...</p> : null
     }
   </>
 }
