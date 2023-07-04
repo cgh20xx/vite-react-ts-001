@@ -14,6 +14,7 @@ const App: React.FC = () => {
   const [postId, setPostId] = useState(1)
   const [error, setError] = useState<Error | null>(null)
   const [loading, setLoading] = useState(false)
+  const [data, setData] = useState([] as Comments[])
 
   // 使用 async await 改寫 fetch
   // 注意： useEffect 第一個參數不支持 async function，故必需定義另一個 async function 並呼叫它。
@@ -22,8 +23,9 @@ const App: React.FC = () => {
     setLoading(true)
     try {
       const res = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${id}`)
-      const data = await res.json() as Comments[]
-      console.log('data2:', data);
+      const resData = await res.json() as Comments[]
+      console.log('resData:', resData);
+      setData(resData)
     } catch (error) {
       console.log('error:', error);
       setError(error as Error) // 強制斷言 error 為 Error
@@ -51,6 +53,12 @@ const App: React.FC = () => {
     }
     {
       loading ? <p>Loading...</p> : null
+    }
+    {/* 顯示 Api 取得 email */}
+    {
+      data.length > 0 && data.map(item => {
+        return <p>{item.email}</p>
+      })
     }
   </>
 }
