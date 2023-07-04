@@ -57,7 +57,7 @@ const App: React.FC = () => {
     {/* 顯示 Api 取得 email */}
     {
       data.length > 0 && data.map(item => {
-        return <p>{item.email}</p>
+        return <p key={item.id}>{item.email}</p>
       })
     }
   </>
