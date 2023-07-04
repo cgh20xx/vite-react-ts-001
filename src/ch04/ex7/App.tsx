@@ -9,8 +9,8 @@ interface Comments {
   body: string
 }
 
-const App: React.FC = () => {
-
+// 自定義 hook (使用 use 開頭)
+function useFetchApi() {
   const [postId, setPostId] = useState(1)
   const [error, setError] = useState<Error | null>(null)
   const [loading, setLoading] = useState(false)
@@ -38,6 +38,14 @@ const App: React.FC = () => {
   useEffect(() => {
     fetchData(postId)
   }, [postId])
+
+  return [data, loading, error, setPostId] as const // 強制斷言為 tuple
+
+}
+
+const App: React.FC = () => {
+
+  const [data, loading, error, setPostId] = useFetchApi()
 
   function clickHandler(id: number) {
     setPostId(id)
