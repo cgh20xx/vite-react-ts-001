@@ -4,6 +4,7 @@ import { useState, useRef } from 'react'
 // 問題：呼叫顯示隱藏的 setHidden 會觸發 rerender 導致變數被重罝。
 // 改善：使用 useRef() 來改寫 sum 可解決以上問題。
 // useRef 與 useState 的不同在於 useRef 更新值時不會 rerender
+// useRef 文件：https://zh-hant.legacy.reactjs.org/docs/hooks-reference.html#useref
 const App: React.FC = () => {
 
   const [hidden, setHidden] = useState(false)
