@@ -12,7 +12,8 @@ import ReactDOM from 'react-dom/client'
 // import App from '@/ch04/ex5/App'
 // import App from '@/ch04/ex6/App'
 // import App from '@/ch04/ex7/App'
-import App from '@/ch04/ex8/App'
+// import App from '@/ch04/ex8/App'
+import App from '@/ch04/ex9/App'
 
 import './index.css'
 
