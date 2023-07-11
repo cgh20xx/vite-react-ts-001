@@ -20,22 +20,27 @@ const App: React.FC = () => {
 
   // useCallback is a React Hook that lets you cache a function definition between re-renders.
   // useCallback 文件：https://react.dev/reference/react/useCallback
-  const memoFunc = useCallback(() => {
-    console.log('memmoFunc');
-  }, [])
+  // const memoFunc = useCallback(() => {
+  //   console.log('memmoFunc');
+  // }, [])
 
   // console.log('memoFunc:', memoFunc);
 
-  // 同樣的修改 deps array 關注 memoFunc 參數後，useEffect callback 就只會執行一次了。
+
+  // useCallback 可以用於記憶 function 避免每次 render 重新產生新的 handler function
+  // 以 onClick 的 handler 為例：
+  const onClickHandler = useCallback(() => {
+    setValue(val => !val)
+  }, [])
+
   useEffect(() => {
     console.log('useEffect callback');
-    memoFunc()
-  }, [memoFunc])
+  }, [value])
 
   return <>
     <h1>App</h1>
     <p>value: {value.toString()}</p>
-    <button onClick={() => {setValue(!value)}}>改變 value</button>
+    <button onClick={onClickHandler}>改變 value</button>
   </>
 }
 
