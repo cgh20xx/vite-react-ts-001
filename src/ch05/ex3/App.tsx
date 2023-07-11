@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo, useCallback } from 'react'
 
 const App: React.FC = () => {
   console.log('App render');
@@ -11,17 +11,26 @@ const App: React.FC = () => {
 
   // useMemo will only recompute the memoized value when one of the deps has changed.
   // useMemo 文件：https://react.dev/reference/react/useMemo
-  const memoObj = useMemo(() => {
-    const obj = { name: 'Hank' }
-    return obj
-  }, [])
+  // const memoObj = useMemo(() => {
+  //   const obj = { name: 'Hank' }
+  //   return obj
+  // }, [])
 
   // console.log('memoObj:', memoObj); // { name: 'Hank' }
 
-  // 修改 deps array 關注 memoObj 參數後，useEffect callback 就只會執行一次了。
+  // useCallback is a React Hook that lets you cache a function definition between re-renders.
+  // useCallback 文件：https://react.dev/reference/react/useCallback
+  const memoFunc = useCallback(() => {
+    console.log('memmoFunc');
+  }, [])
+
+  // console.log('memoFunc:', memoFunc);
+
+  // 同樣的修改 deps array 關注 memoFunc 參數後，useEffect callback 就只會執行一次了。
   useEffect(() => {
     console.log('useEffect callback');
-  }, [memoObj])
+    memoFunc()
+  }, [memoFunc])
 
   return <>
     <h1>App</h1>
