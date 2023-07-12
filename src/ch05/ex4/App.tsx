@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo, useMemo, useState } from 'react'
 // 問題：這範例是要突顯出 App 裡的 state 被更新，連 B 組件也被更新了，但 B 組件並沒有使用到 Props，
 
 // 解決：使用 React.memo 可以記憶 Function Component 的 props 有無變化，若無變化就不會更新。
@@ -26,9 +26,18 @@ const App: React.FC = () => {
   const [value, setValue] = useState(false)
   const [num, setNum] = useState(0)
   const [obj, setObj] = useState({ name: '' })
+  
+  // 使用 React.useMemo cache obj 物件，當 obj.name 改變時才更新 memoObj。
+  // 如此一來 obj.name 只要不改變 B 組件就不會 rerender。 
+  // 這邊可以暫時忽略 eslint deps 的規則
+  const memoObj = useMemo(() => {
+    return obj
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [obj.name])
   return <>
     <h1>App</h1>
-    <B num={num} obj={obj}/>
+    {/* 將 obj={obj} 改為 obj={memoObj} */}
+    <B num={num} obj={memoObj}/>
     <button onClick={() => {setValue(!value)}}>重新 render</button>
     {/* 當 num 被改變時，B 組件也會被更新。 */}
     <button onClick={() => {setNum(num + 1)}}>num  +1</button>
