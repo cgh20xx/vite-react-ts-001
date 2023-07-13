@@ -1,7 +1,7 @@
 // import React from 'react'
 import ReactDOM from 'react-dom/client'
 // ch06 安裝 react-router-dom
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 // import App from '@/ch03/ex1/App'
 // import App from '@/ch03/ex1/App2'
@@ -34,10 +34,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   // </React.StrictMode>
 
   // 為 App 包上 <BrowserRouter>
-  // <Route> 能有多個，只能包在 <Routes> 底下使用
   <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />}/>
-    </Routes>
+    <App />
   </BrowserRouter>,
 )
