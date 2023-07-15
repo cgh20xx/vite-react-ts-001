@@ -1,4 +1,21 @@
-import { Routes, Route, Link, Outlet } from 'react-router-dom'
+import { Routes, Route, Link, Outlet, useParams } from 'react-router-dom'
+
+// 新增一個 Product 產品頁
+function Product() {
+  const params = useParams()
+  console.log('params:', params);
+  return <>
+    <h1>Page ProductId: { params.productId }</h1>
+  </>
+}
+
+// 新增一個 Shop 頁，裡面是 Product
+function Shop() {
+  return <>
+    <h1>Page Shop</h1>
+    <Outlet />
+  </>
+}
 
 // 新增一個 AboutMe 頁面位於 About 內，路由為 /about/me/
 function AboutMe() {
@@ -38,6 +55,9 @@ const App: React.FC = () => {
       <Route path="/" element={<Home />}/>
       <Route path="/about" element={<About />}>
         <Route path="me" element={<AboutMe />} />
+      </Route>
+      <Route path="/shop" element={<Shop />}>
+        <Route path=":productId" element={<Product />} />
       </Route>
     </Routes>
   </>
