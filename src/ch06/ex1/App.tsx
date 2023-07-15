@@ -1,4 +1,4 @@
-import { Routes, Route, Link, Outlet, useParams } from 'react-router-dom'
+import { Routes, Route, Link, Outlet, useParams, useNavigate } from 'react-router-dom'
 
 // 新增一個 Product 產品頁
 function Product() {
@@ -40,6 +40,9 @@ function Home() {
 
 
 const App: React.FC = () => {
+  // 使用 useNavigate 可以用程式跳轉網址，不需使用 <Link> 組件
+  const navigate = useNavigate()
+
   return <>
     <h1>Header</h1>
     <ul>
@@ -48,6 +51,9 @@ const App: React.FC = () => {
       </li>
       <li>
         <Link to="/about">About</Link>
+      </li>
+      <li>
+        <button onClick={() => navigate('/shop/abc')}>/shop/abc</button>
       </li>
     </ul>
     {/* <Route> 能有多個，只能包在 <Routes> 底下使用 */}
