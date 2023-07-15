@@ -38,6 +38,10 @@ function Home() {
   </>
 }
 
+function PageNotFound() {
+  return <h1>404 找不到頁面</h1>
+}
+
 // 改使用 config 的方式設定路由較為彈性
 const routesConfig: RouteObject[] = [
   {
@@ -63,6 +67,11 @@ const routesConfig: RouteObject[] = [
         element: <Product />
       },
     ]
+  },
+  // 新增找不到頁面的路由，需放在最後面。
+  {
+    path: '*',
+    element: <PageNotFound />
   },
 ]
 
