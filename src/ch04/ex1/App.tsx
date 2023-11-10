@@ -9,7 +9,7 @@ import React from 'react';
 // https://pjchender.dev/react/react-higher-order-component/
 
 // 簡單來說就是
-// 1. 建立一個 fuction 把不同的部份當參數傳進去，回傳一個新的 component。
+// 1. 建立一個 function 把不同的部份當參數傳進去，回傳一個新的 component。
 // 2. 將 ScoreBoardA、ScoreBoardB 原本的 state.totalScore 移除
 // 3. 改由 HOC 上傳入 props.totalScore 給 ChildComponent
 
@@ -76,7 +76,7 @@ class ScoreBoardB extends React.Component<BProps, BState> {
 type BoardTotal = {
   totalScore: number
 }
-// 實作 HOC：建立一個 fuction 把不同的部份當參數傳進去，回傳一個新的 component。
+// 實作 HOC：建立一個 function 把不同的部份當參數傳進去，回傳一個新的 component。
 function withTotalScore(ChildComponent: React.ComponentType<BoardTotal>, boardName: string) {
   return class extends React.Component<object, BoardTotal> {
     constructor(props: object) {
