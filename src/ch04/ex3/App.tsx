@@ -33,7 +33,7 @@ import { useState } from 'react'
 
 // React 也有事件冒泡機制，父元件也會偵聽到子元件的 onClick 事件，
 // 父組件渲染，子組件也會重新渲染。
-// 照理說 Child 會被 render 兩次，但實測只有丑次，因 react 內部機制會合併掉。
+// 照理說 Child 會被 render 兩次，但實測只有一次，因 react 內部機制會合併掉。
 
 // const Parent: React.FC = () => {
 //   console.log('Parent');

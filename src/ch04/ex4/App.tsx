@@ -12,7 +12,7 @@ const App: React.FC = () => {
   }
 
   // useEffect 無論如何一開始一定會執行一次 
-  // 第一個參數為 sutup function
+  // 第一個參數為 setup function
   // 第二個參數為 dependencies
 
   // 1. 若 dependencies 傳入 [] 表此組件在 render 時只執行一次
